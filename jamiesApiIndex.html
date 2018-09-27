@@ -2,12 +2,12 @@
 <html>
   <head>
     <meta charset="utf-8">
-   <title>Jamie's Neat Group of API's</title>
+    <title>Jamie's Neat Group of API's</title>
   </head>
   <body>
     <h1>Jamie's Neat Group of API's</h1>
     <!--- GEOLOCATION --->
-    <h2>Geo Location</h2>
+    <h3>Geo Location</h3>
     <p id="demo">Click the button to get your position.</p>
     <button onclick="getLocation()">Try It</button>
     <div id="mapholder"></div>
@@ -43,16 +43,67 @@
           }
         }
       </script>
- 
+    <!--- DRAG AND DROP --->
+      <style>
+      #div1 {
+          width: 198px;
+          height: 150px;
+          padding: 10px;
+          border: 1px solid #aaaaaa;
+      }
+      </style>
+      <script>
+      function allowDrop(ev) {
+          ev.preventDefault();
+      }
 
+      function drag(ev) {
+          ev.dataTransfer.setData("text", ev.target.id);
+      }
 
-
-
- 
-
-
-
-
-
+      function drop(ev) {
+          ev.preventDefault();
+          var data = ev.dataTransfer.getData("text");
+          ev.target.appendChild(document.getElementById(data));
+      }
+      </script>
+      <h3>Drag the RevJPC logo into the rectangle:</h3>
+      <div id="div1" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+      <br>
+      <img id="drag1" src="logo.png" draggable="true" ondragstart="drag(event)" width="198 " height="150">
+    <!--- CANVAS --->
+      <h3>Image to use:</h3>>
+      <img id="Giada" src="Giada.jpg" alt="The Scream" width="200" height="300">
+      <p>Canvas to fill:</p>
+      <canvas id="myCanvas" width="270" height="395"
+      style="border:1px solid #d3d3d3;">
+      Your browser does not support the HTML5 canvas tag.</canvas>
+      <p><button onclick="myCanvas()">Try it</button></p>
+      <script>
+      function myCanvas() {
+      var c = document.getElementById("myCanvas");
+      var ctx = c.getContext("2d");
+      var img = document.getElementById("Giada");
+      ctx.drawImage(img,10,10);
+      }
+      </script>
+    <!--- GOOGLE MAP --->
+    <h3>My house!</h3>
+      <div id="googleMap" style="width:600px;height:600px;"></div>
+      <script>
+      function myMap() {
+      var mapProp= {
+          center:new google.maps.LatLng(35.564133, -82.648106),
+          zoom:17,
+      };
+      var map=new google.maps.Map(document.getElementById("googleMap"),mapProp);
+      }
+      </script>
+      <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBfSSTpswot4raNyJ-z9U5Nvayq_ajnlFk&callback=myMap"></script>
+    <!--- OPEN WEATHER MAP --->
+      <h3>The weather</h3>
+      <div id="openweathermap-widget-11"></div>
+      <script src='//openweathermap.org/themes/openweathermap/assets/vendor/owm/js/d3.min.js'></script>
+      <script>window.myWidgetParam ? window.myWidgetParam : window.myWidgetParam = [];  window.myWidgetParam.push({id: 11,cityid: '4458155',appid: 'bb2bce0aa7672b260f46015960f954a4',units: 'imperial',containerid: 'openweathermap-widget-11',  });  (function() {var script = document.createElement('script');script.async = true;script.charset = "utf-8";script.src = "//openweathermap.org/themes/openweathermap/assets/vendor/owm/js/weather-widget-generator.js";var s = document.getElementsByTagName('script')[0];s.parentNode.insertBefore(script, s);  })();</script>
   </body>
 </html>
